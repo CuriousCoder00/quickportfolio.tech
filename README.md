@@ -48,7 +48,6 @@ pnpm dev
 
 To add new directory or app in `apps` or `packages` run:
 
-
 ```sh copy
 pnpm turbo gen workspace --name <app-name>
 ```
