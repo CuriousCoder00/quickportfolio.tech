@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
     "@repo/ui": "workspace:*",
+    "@repo/validators": "workspace:*",
     "lucide-react": "^0.468.0",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
+    "react-hook-form": "^7.54.0",
     "react-router-dom": "^7.0.2"
   },
   "devDependencies": {
