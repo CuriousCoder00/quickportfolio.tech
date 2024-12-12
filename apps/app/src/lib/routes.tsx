@@ -3,8 +3,8 @@ import LoginPage from "../pages/auth/login";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<div>Hello</div>} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route index element={<div>Hello</div>} />
+      <Route path="login" element={<LoginPage />} />
     </Routes>
   );
 };
