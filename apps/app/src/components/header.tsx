@@ -10,7 +10,7 @@ const Header = () => {
           <a href="#" className="text-blue-500">
             Get Started
           </a>
-          <a href="/auth/login" className="text-blue-500">
+          <a href="/login" className="text-blue-500">
             Sign In
           </a>
           <ThemeToggle />

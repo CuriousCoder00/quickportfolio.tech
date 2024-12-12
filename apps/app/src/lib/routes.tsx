@@ -4,7 +4,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<div>Hello</div>} />
-      <Route path="/auth/login" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   );
 };
