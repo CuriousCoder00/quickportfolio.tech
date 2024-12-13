@@ -1,6 +1,6 @@
 import {
-  userLoginSchema,
-  UserLoginInput,
+  userSignupSchema,
+  UserSignupInput,
 } from "@repo/validators/user.validations.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,17 +8,25 @@ import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
 import { Link } from "react-router-dom";
-const LoginForm = () => {
-  const form = useForm<UserLoginInput>({
-    resolver: zodResolver(userLoginSchema),
+const SignupForm = () => {
+  const form = useForm<UserSignupInput>({
+    resolver: zodResolver(userSignupSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
   return (
     <AuthForm form={form}>
-      <form action="" className="flex flex-col w-full gap-4 my-4">
+      <form action="" className="flex flex-col w-full gap-4">
+        <AuthInput
+          form={form}
+          label="Full Name"
+          name="name"
+          placeholder="John Doe"
+        />
         <AuthInput
           form={form}
           label="Email Address"
@@ -32,19 +40,21 @@ const LoginForm = () => {
           placeholder="******"
           type="password"
         />
-        <p className="text-xs text-end">
-          <Link to="/auth/register" className="text-sky-600">
-            Forgot Password?
-          </Link>
-        </p>
+        <AuthInput
+          form={form}
+          label="Confirm Password"
+          name="confirmPassword"
+          placeholder="******"
+          type="password"
+        />
         <Button type="submit" className="w-full">
-          Login
+          Signup
         </Button>
         <div>
           <p className="text-sm text-end">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-sky-600">
-              Register
+            Already have an account?{" "}
+            <Link to="/login" className="text-sky-600">
+              Login
             </Link>
           </p>
         </div>
@@ -53,4 +63,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
