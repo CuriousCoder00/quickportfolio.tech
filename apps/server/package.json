@@ -3,9 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'Add dev script here'",
-    "build": "echo 'Add build script here'",
-    "test": "echo 'Add test script here'",
-    "lint": "echo 'Add lint script here'"
+    "dev": "nodemon index.ts",
+    "start": "tsc -b && node dist/index.js",
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.1",
+    "express": "^4.21.2",
+    "prisma": "^6.0.1",
+    "@repo/validators": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.9"
   }
 }
