@@ -1,7 +1,7 @@
 import {
   userLoginSchema,
   UserLoginInput,
-} from "@repo/validators/user.validations.ts";
+} from "@repo/validators/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";

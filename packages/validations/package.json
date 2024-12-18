@@ -8,7 +8,13 @@
   "dependencies": {
     "zod": "catalog:"
   },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:"
+  },
   "exports": {
-    "./user.validations.ts": "./src/user.validations.ts"
+    "./user": "./src/user.validations.ts"
   }
 }

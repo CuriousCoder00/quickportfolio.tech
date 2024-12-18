@@ -1,7 +1,4 @@
-import {
-  userSignupSchema,
-  UserSignupInput,
-} from "@repo/validators/user.validations.ts";
+import { signupSchema, SignupInput } from "@repo/validators/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
@@ -9,8 +6,8 @@ import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
 import { Link } from "react-router-dom";
 const SignupForm = () => {
-  const form = useForm<UserSignupInput>({
-    resolver: zodResolver(userSignupSchema),
+  const form = useForm<SignupInput>({
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       name: "",
       email: "",
