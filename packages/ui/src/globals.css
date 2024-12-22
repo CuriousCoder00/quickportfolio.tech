@@ -29,6 +29,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --scrollbar: 340 75% 55%;
   }
 
   .dark {
@@ -56,7 +57,22 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --scrollbar: 340 75% 55%;
+
   }
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--scrollbar));
+    border-radius: 0.25rem;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--background) / 0.5);
+    border-radius: 0.25rem;
+  }
+
 }
 
 @layer base {
@@ -66,4 +82,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

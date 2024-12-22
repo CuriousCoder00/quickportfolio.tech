@@ -1,15 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "../../../packages/ui/src/globals.css";
+import "@repo/ui/globals.css";
+import "./styles.css";
 import { ThemeProvider } from "./lib/themes/themes.tsx";
-import { BrowserRouter } from "react-router-dom";
-import Header from "./components/header.tsx";
+import { BrowserRouter } from "react-router";
+import { Navbar } from "./components/header/header.tsx";
+import { navLinks } from "./lib/data/links.ts";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider defaultTheme="dark" attribute={"class"}>
-        <Header />
+        <Navbar navLinks={navLinks} />
         <App />
       </ThemeProvider>
     </BrowserRouter>

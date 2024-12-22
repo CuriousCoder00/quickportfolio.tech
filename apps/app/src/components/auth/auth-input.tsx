@@ -35,6 +35,7 @@ export const AuthInput = ({
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input
+            className="bg-transparent"
               {...field}
               type={type}
               placeholder={placeholder}

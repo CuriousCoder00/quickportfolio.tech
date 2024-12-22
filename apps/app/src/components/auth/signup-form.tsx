@@ -4,7 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { signupService } from "../../lib/services/auth.services";
+import { useState } from "react";
 const SignupForm = () => {
   const form = useForm<SignupInput>({
     resolver: zodResolver(signupSchema),
@@ -15,9 +17,40 @@ const SignupForm = () => {
       confirmPassword: "",
     },
   });
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // const { toast } = useToast();
+
+  const navigate = useNavigate();
+
+  const handleSignup = async (data: SignupInput) => {
+    setLoading(true);
+    try {
+      const res = await signupService(data);
+      // toast({
+      //   title: res.message,
+      //   variant: res.status ? "default" : "destructive",
+      // });
+      if (res.status === 200 || res.status === 201 || res.status === 204) {
+        navigate("/auth/login");
+      }
+    } catch (error) {
+      // toast({
+      //   title: (error as Error).message,
+      //   variant: "destructive",
+      // });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <AuthForm form={form}>
-      <form action="" className="flex flex-col w-full gap-4">
+      <form
+        action=""
+        className="flex flex-col w-full gap-4"
+        onSubmit={form.handleSubmit(handleSignup)}
+      >
         <AuthInput
           form={form}
           label="Full Name"
@@ -47,14 +80,6 @@ const SignupForm = () => {
         <Button type="submit" className="w-full">
           Signup
         </Button>
-        <div>
-          <p className="text-sm text-end">
-            Already have an account?{" "}
-            <Link to="/login" className="text-sky-600">
-              Login
-            </Link>
-          </p>
-        </div>
       </form>
     </AuthForm>
   );

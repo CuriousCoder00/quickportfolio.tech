@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .glare-image {
+    background-image: url("/glare.png");
+    background-repeat: no-repeat;
+  }
+
+  .light-rays {
+    background-image: url("/rays.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+  }
+}

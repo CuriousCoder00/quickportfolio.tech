@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 const LoginForm = () => {
   const form = useForm<UserLoginInput>({
     resolver: zodResolver(userLoginSchema),
@@ -16,9 +16,11 @@ const LoginForm = () => {
       password: "",
     },
   });
+
+
   return (
     <AuthForm form={form}>
-      <form action="" className="flex flex-col w-full gap-4 my-4">
+      <form action="" className="flex flex-col w-full gap-4">
         <AuthInput
           form={form}
           label="Email Address"
@@ -40,14 +42,6 @@ const LoginForm = () => {
         <Button type="submit" className="w-full">
           Login
         </Button>
-        <div>
-          <p className="text-sm text-end">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-sky-600">
-              Register
-            </Link>
-          </p>
-        </div>
       </form>
     </AuthForm>
   );
