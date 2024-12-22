@@ -13,7 +13,7 @@ export const createUser = async (req: Request, res: Response) => {
             }
         });
         if (userExists) {
-            res.status(409).json({ message: "User already exists" });
+            res.status(409).json({ success: false, message: "User already exists" });
             return;
         }
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -24,9 +24,9 @@ export const createUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
             }
         });
-        res.status(201).json({ message: "User created successfully", user });
+        res.status(201).json({ success: true, message: "User created successfully", user });
     } catch (error: any) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
@@ -39,12 +39,12 @@ export const loginUser = async (req: Request, res: Response) => {
             }
         });
         if (!user) {
-            res.status(404).json({ message: "User not found" });
+            res.status(404).json({ success: false, message: "User not found" });
             return;
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            res.status(401).json({ message: "Invalid password" });
+            res.status(401).json({ success: false, message: "Invalid password" });
             return;
         }
         const token = jwt.sign({
@@ -53,10 +53,10 @@ export const loginUser = async (req: Request, res: Response) => {
         }, process.env.AUTH_SECRET as string, { expiresIn: "1h" });
         // set cookie
 
-        res.cookie("qp_token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({ message: "Login successful", user, token });
+        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({ success: true, message: "Login successful", user, token });
         return;
     } catch (error: any) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 

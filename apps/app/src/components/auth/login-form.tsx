@@ -5,10 +5,12 @@ import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
 import { Link } from "react-router";
-import { useTransition } from "react";
+import { useState } from "react";
 import { loginService } from "../../lib/services/auth.services";
+import { useToast } from "@repo/ui/hooks/use-toast";
 const LoginForm = () => {
-  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
   const form = useForm<UserLoginInput>({
     resolver: zodResolver(userLoginSchema),
     defaultValues: {
@@ -17,12 +19,21 @@ const LoginForm = () => {
     },
   });
   const handleLogin = async (data: UserLoginInput) => {
-    startTransition(() => {
-      const res = loginService(data);
-      res.then((response) => {
-        console.log(response);
+    setLoading(true);
+    try {
+      const res = await loginService(data);
+      toast({
+        title: res.message,
+        variant: res.success === true ? "default" : "destructive",
       });
-    });
+    } catch (error) {
+      toast({
+        title: (error as Error).message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,14 +43,14 @@ const LoginForm = () => {
         onSubmit={form.handleSubmit(handleLogin)}
       >
         <AuthInput
-          disabled={isPending}
+          disabled={loading}
           form={form}
           label="Email Address"
           name="email"
           placeholder="john.doe@gmail.com"
         />
         <AuthInput
-          disabled={isPending}
+          disabled={loading}
           form={form}
           label="Password"
           name="password"
@@ -51,8 +62,8 @@ const LoginForm = () => {
             Forgot Password?
           </Link>
         </p>
-        <Button disabled={isPending} type="submit" className="w-full">
-          {isPending ? "Loading..." : "Login"}
+        <Button disabled={loading} type="submit" className="w-full">
+          {loading ? "Loading..." : "Login"}
         </Button>
       </form>
     </AuthForm>

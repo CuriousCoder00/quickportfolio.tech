@@ -7,6 +7,7 @@ import { ThemeProvider } from "./lib/themes/themes.tsx";
 import { BrowserRouter } from "react-router";
 import { Navbar } from "./components/header/header.tsx";
 import { navLinks } from "./lib/data/links.ts";
+// import { ToastProvider } from "@repo/ui/components/ui/toast";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>

@@ -10,10 +10,10 @@ export const loginService = async (data: UserLoginInput) => {
         if (response.data.token) {
             localStorage.setItem('token', response.data.token);
         }
-        return { message: response.data.message, status: response.status, user: response.data.user };
+        return { success: response.data.success, message: response.data.message, status: response.status, user: response.data.user };
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            return { message: error.response?.data.message };
+            return { success: false, message: error.response?.data.message };
         }
         throw error;
     }
@@ -22,10 +22,10 @@ export const loginService = async (data: UserLoginInput) => {
 export const signupService = async (data: SignupInput) => {
     try {
         const response = await axiosInstance.post(api.register, data) as AxiosResponse;
-        return { message: response.data.message, status: response.status };
+        return { success: response.data.success, message: response.data.message, status: response.status };
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            return { message: error.response?.data.message };
+            return { success: false, message: error.response?.data.message };
         }
         throw error;
     }
