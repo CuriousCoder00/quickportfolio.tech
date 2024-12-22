@@ -7,13 +7,14 @@ import { ThemeProvider } from "./lib/themes/themes.tsx";
 import { BrowserRouter } from "react-router";
 import { Navbar } from "./components/header/header.tsx";
 import { navLinks } from "./lib/data/links.ts";
-// import { ToastProvider } from "@repo/ui/components/ui/toast";
+import { Toaster } from "@repo/ui/components/ui/toaster";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider defaultTheme="dark" attribute={"class"}>
         <Navbar navLinks={navLinks} />
         <App />
+        <Toaster />
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
