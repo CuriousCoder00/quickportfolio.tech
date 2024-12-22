@@ -6,7 +6,7 @@ import { AuthInput } from "./auth-input";
 import { Button } from "@repo/ui/components/ui/button";
 import { useNavigate } from "react-router";
 import { signupService } from "../../lib/services/auth.services";
-import { useState } from "react";
+// import { useState } from "react";
 const SignupForm = () => {
   const form = useForm<SignupInput>({
     resolver: zodResolver(signupSchema),
@@ -18,14 +18,14 @@ const SignupForm = () => {
     },
   });
 
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
   // const { toast } = useToast();
 
   const navigate = useNavigate();
 
   const handleSignup = async (data: SignupInput) => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const res = await signupService(data);
       // toast({
@@ -41,7 +41,7 @@ const SignupForm = () => {
       //   variant: "destructive",
       // });
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
   return (

@@ -8,7 +8,7 @@ export const loginService = async (data: UserLoginInput) => {
         ) as AxiosResponse;
         console.log(response)
         if (response.data.token) {
-            localStorage.setItem('writeup_token', response.data.token);
+            localStorage.setItem('token', response.data.token);
         }
         return { message: response.data.message, status: response.status, user: response.data.user };
     } catch (error) {
