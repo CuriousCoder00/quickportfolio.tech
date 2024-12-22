@@ -32,12 +32,14 @@ const LoginForm = () => {
         onSubmit={form.handleSubmit(handleLogin)}
       >
         <AuthInput
+          disabled={isPending}
           form={form}
           label="Email Address"
           name="email"
           placeholder="john.doe@gmail.com"
         />
         <AuthInput
+          disabled={isPending}
           form={form}
           label="Password"
           name="password"
@@ -49,8 +51,8 @@ const LoginForm = () => {
             Forgot Password?
           </Link>
         </p>
-        <Button type="submit" className="w-full">
-          Login
+        <Button disabled={isPending} type="submit" className="w-full">
+          {isPending ? "Loading..." : "Login"}
         </Button>
       </form>
     </AuthForm>
