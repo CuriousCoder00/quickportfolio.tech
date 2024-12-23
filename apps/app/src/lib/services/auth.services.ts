@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { SignupInput, UserLoginInput } from "@repo/validators/user";
+import { UserSignupInput, UserLoginInput } from "@repo/validators/user";
 import { api, axiosInstance } from "./api.config";
 
 export const loginService = async (data: UserLoginInput) => {
@@ -19,7 +19,7 @@ export const loginService = async (data: UserLoginInput) => {
     }
 }
 
-export const signupService = async (data: SignupInput) => {
+export const signupService = async (data: UserSignupInput) => {
     try {
         const response = await axiosInstance.post(api.register, data) as AxiosResponse;
         return { success: response.data.success, message: response.data.message, status: response.status };
