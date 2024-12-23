@@ -11,10 +11,11 @@ import {
   SheetTrigger,
 } from "@repo/ui/components/ui/sheet";
 import { NavbarLinks } from "./navbar-links";
+import { Button } from "@repo/ui/components/ui/button";
+import { Link } from "react-router";
 
 interface NavbarProps {
   links?: Array<{ name: String; href: string }>;
-  showInput?: Boolean;
   hideMobileNav?: Boolean;
 }
 
@@ -46,6 +47,9 @@ export const MobileNavbar = ({ links, hideMobileNav }: NavbarProps) => {
                 <SheetDescription className="w-full z-10">
                   <div className="flex flex-col items-start justify-center mt-5 gap-3 min-w-full">
                     <NavbarLinks links={links} />
+                    <Button size={"sm"} className="w-full">
+                      <Link to="/auth/login">Login</Link>
+                    </Button>
                   </div>
                 </SheetDescription>
               </SheetHeader>

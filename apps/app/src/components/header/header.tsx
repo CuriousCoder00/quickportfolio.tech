@@ -1,32 +1,20 @@
 "use client";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import ThemeToggle from "../../lib/themes/theme-toggle";
 import { MobileNavbar } from "./mobile-navbar";
 import { NavbarLinks } from "./navbar-links";
+import { Button } from "@repo/ui/components/ui/button";
+import { navLinks } from "../../lib/data/links";
 
-interface NavbarProps {
-  navLinks?: Array<{ name: String; href: string }>;
-  showInput?: Boolean;
-  hideMobileNav?: Boolean;
-  hideAll?: boolean;
-}
-
-export const Navbar = ({
-  navLinks,
-  showInput,
-  hideMobileNav,
-  hideAll,
-}: NavbarProps) => {
+export const Navbar = () => {
+  const path = useLocation().pathname;
   return (
-    <header className={`min-w-full ${hideAll && "hidden"}`}>
-      <nav
-        className={`fixed top-0 left-0 right-0 md:rounded-full backdrop-blur md:bg-purple-100 dark:bg-slate-950/40 bg-opacity-50 md:border border-purple-500/60 md:w-[80%] md:mt-5 z-[60] flex container dark:text-white gap-4`}
-      >
+    <header className={`min-w-full`}>
+      <nav className="fixed top-0 left-0 right-0 md:rounded-full backdrop-blur md:bg-purple-100 dark:bg-slate-950/40 bg-opacity-50 md:border border-purple-500/60 md:w-[80%] lg:w-[60%] md:mt-5 z-[60] flex container dark:text-white gap-4 min-h-16">
         <div className="flex items-center w-full py-2 gap-2">
           <MobileNavbar
-            hideMobileNav={hideMobileNav}
+            hideMobileNav={path === "/auth/login" || path === "/auth/register"}
             links={navLinks}
-            showInput={showInput}
           />
           <div className="flex items-center space-x-4">
             <Link
@@ -39,10 +27,18 @@ export const Navbar = ({
             </Link>
           </div>
         </div>
-        <div className="hidden md:flex items-center space-x-4">
+        <div
+          className={`${path === "/auth/login" || path === "/auth/register" ? "hidden" : "hidden md:flex items-center space-x-4"} `}
+        >
           <NavbarLinks links={navLinks} />
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center gap-3">
+          <Button
+            size={"sm"}
+            className={`${path === "/auth/login" || path === "/auth/register" ? "hidden" : ""} h-8 px-4 max-md:hidden`}
+          >
+            <Link to="/auth/login">Login</Link>
+          </Button>
           <ThemeToggle />
         </div>
       </nav>

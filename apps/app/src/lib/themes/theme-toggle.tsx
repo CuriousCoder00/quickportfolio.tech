@@ -7,11 +7,11 @@ const ThemeToggle = () => {
   return (
     <div className="flex items-center justify-center">
       {theme === "dark" ? (
-        <Button variant={"ghost"} onClick={() => setTheme("light")}>
+        <Button className="hover:bg-transparent" variant={"ghost"} onClick={() => setTheme("light")}>
           <Sun />
         </Button>
       ) : (
-        <Button variant={"ghost"} onClick={() => setTheme("dark")}>
+        <Button className="hover:bg-transparent" variant={"ghost"} onClick={() => setTheme("dark")}>
           <MoonStar />
         </Button>
       )}
