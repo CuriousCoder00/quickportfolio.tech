@@ -1,4 +1,4 @@
-import { signupSchema, SignupInput } from "@repo/validators/user";
+import { userSignupSchema, UserSignupInput } from "@repo/validators/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
@@ -8,15 +8,15 @@ import { useNavigate } from "react-router";
 import { signupService } from "../../lib/services/auth.services";
 import { useToast } from "@repo/ui/hooks/use-toast";
 import { useState } from "react";
+import { PasswordInput } from "./password-input";
 // import { useState } from "react";
 const SignupForm = () => {
-  const form = useForm<SignupInput>({
-    resolver: zodResolver(signupSchema),
+  const form = useForm<UserSignupInput>({
+    resolver: zodResolver(userSignupSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -26,13 +26,13 @@ const SignupForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSignup = async (data: SignupInput) => {
+  const handleSignup = async (data: UserSignupInput) => {
     setLoading(true);
     try {
       const res = await signupService(data);
       toast({
         title: res.message,
-        variant: res.success === true ? "default" : "destructive",
+        variant: res.success === true ? "success" : "destructive",
       });
       if (res.status === 200 || res.status === 201 || res.status === 204) {
         navigate("/auth/login");
@@ -66,22 +66,14 @@ const SignupForm = () => {
           name="email"
           placeholder="john.doe@gmail.com"
         />
-        <AuthInput
+        <PasswordInput
           form={form}
           label="Password"
           name="password"
           disabled={loading}
           placeholder="******"
-          type="password"
         />
-        <AuthInput
-          form={form}
-          label="Confirm Password"
-          disabled={loading}
-          name="confirmPassword"
-          placeholder="******"
-          type="password"
-        />
+
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? "Loading..." : "Sign Up"}
         </Button>

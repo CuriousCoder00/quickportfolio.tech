@@ -12,13 +12,13 @@ const AuthForm = ({
   const location = useLocation();
   const path = location.pathname;
   return (
-    <div className="flex flex-col items-start justify-center mx-auto p-4 md:rounded-xl sm:rounded-lg gap-3 border border-border backdrop-blur-xl bg-black/5 dark:bg-black/40 max-w-md">
+    <div className="flex flex-col items-start justify-center mx-auto p-4 md:rounded-xl sm:rounded-lg gap-3 border border-border backdrop-blur-xl bg-black/5 max-w-md">
       <div className="flex flex-col items-center justify-center w-full my-4">
         {path === "/auth/login" ? (
           <div className="flex flex-col gap-2 items-start justify-start">
             <h1 className="font-bold text-xl">
               Welcome to{" "}
-              <span className="text-sky-600">QuickPotfolio.tech</span>
+              <span className="text-sky-600">QuickPotfolio</span>
             </h1>
             <p className="text-sm">
               Login to your account to continue using our services
@@ -37,7 +37,7 @@ const AuthForm = ({
           <div className="flex flex-col gap-2 items-start justify-start">
             <h1 className="font-bold text-xl">
               Create an account with{" "}
-              <span className="text-sky-600">QuickPotfolio.tech</span>
+              <span className="text-sky-600">QuickPotfolio</span>
             </h1>
             <p className="text-sm">
               Create an account to start using our services
