@@ -10,7 +10,7 @@ export const Navbar = () => {
   const path = useLocation().pathname;
   return (
     <header className={`min-w-full`}>
-      <nav className="fixed top-0 left-0 right-0 md:rounded-full backdrop-blur md:bg-purple-100 dark:bg-slate-950/40 bg-opacity-50 md:border border-purple-500/60 md:w-[80%] lg:w-[60%] md:mt-5 z-[60] flex container dark:text-white gap-4 min-h-16">
+      <nav className="fixed top-0 left-0 right-0 md:rounded-full backdrop-blur-xl md:bg-purple-100 dark:bg-slate-950/40 bg-opacity-50 md:border border-purple-500/60 md:w-[80%] lg:w-[60%] md:mt-5 z-[60] flex container dark:text-white gap-4 min-h-16 shadow-md dark:shadow-purple-700/60 backdrop-filter">
         <div className="flex items-center w-full py-2 gap-2">
           <MobileNavbar
             hideMobileNav={path === "/auth/login" || path === "/auth/register"}
@@ -34,11 +34,27 @@ export const Navbar = () => {
         </div>
         <div className="flex justify-center items-center gap-3">
           <Button
+            asChild
             size={"sm"}
-            className={`${path === "/auth/login" || path === "/auth/register" ? "hidden" : ""} h-8 px-4 max-md:hidden`}
+            className={`${path === "/auth/login" || path === "/auth/register" ? "hidden" : ""} max-md:hidden p-0`}
           >
-            <Link to="/auth/login">Login</Link>
+            <div className="items-center  justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
+              <span
+                className={`relative inline-block overflow-hidden rounded-md p-[1.5px] ${path === "/auth/login" || path === "/auth/register" ? "hidden" : ""}`}
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-gray-950  text-xs font-medium text-gray-50 backdrop-blur-3xl">
+                  <Link
+                    to="/auth/login"
+                    className="inline-flex rounded-md text-center group items-center w-full justify-center   bg-gradient-to-tr from-zinc-300/5 via-purple-400/20 to-transparent    text-white border-input border-[1px] hover:bg-transparent/90 transition-colors sm:w-auto py-2 px-10"
+                  >
+                    Login
+                  </Link>
+                </div>
+              </span>
+            </div>
           </Button>
+
           <ThemeToggle />
         </div>
       </nav>

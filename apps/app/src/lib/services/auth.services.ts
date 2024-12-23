@@ -12,10 +12,7 @@ export const loginService = async (data: UserLoginInput) => {
         }
         return { success: response.data.success, message: response.data.message, status: response.status, user: response.data.user };
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            return { success: false, message: error.response?.data.message };
-        }
-        throw error;
+        return { success: false, message: "Internal Server Error" };
     }
 }
 

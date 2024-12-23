@@ -47,8 +47,20 @@ export const MobileNavbar = ({ links, hideMobileNav }: NavbarProps) => {
                 <SheetDescription className="w-full z-10">
                   <div className="flex flex-col items-start justify-center mt-5 gap-3 min-w-full">
                     <NavbarLinks links={links} />
-                    <Button size={"sm"} className="w-full">
-                      <Link to="/auth/login">Login</Link>
+                    <Button asChild className="w-full p-0">
+                      <div className="items-center  justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0 w-full">
+                        <span className="relative inline-block overflow-hidden rounded-md p-[1.5px] w-full h-full">
+                          <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] w-full h-full" />
+                          <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md text-xs font-medium backdrop-blur-3xl dark:bg-black bg-white">
+                            <Link
+                              to="/auth/login"
+                              className="inline-flex rounded-md text-center group items-center w-full justify-center   bg-gradient-to-tr dark:from-zinc-300/5 from-zinc-300 via-purple-400 dark:via-purple-400/20 to-transparent border-input border-[1px] dark:text-white text-black hover:bg-transparent/90 transition-colors sm:w-auto py-2 px-10"
+                            >
+                              Login
+                            </Link>
+                          </div>
+                        </span>
+                      </div>
                     </Button>
                   </div>
                 </SheetDescription>

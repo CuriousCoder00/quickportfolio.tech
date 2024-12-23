@@ -13,8 +13,8 @@ export const createUser = async (req: Request, res: Response) => {
             }
         });
         if (userExists) {
-            res.status(409).json({ success: false, message: "User already exists" });
-            return;
+            return res.status(409).json({ success: false, message: "User already exists" });
+
         }
         const hashedPassword = await bcrypt.hash(password, 10)
         const user = await db.user.create({
@@ -24,9 +24,9 @@ export const createUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
             }
         });
-        res.status(201).json({ success: true, message: "User created successfully", user });
+        return res.status(201).json({ success: true, message: "User created successfully", user });
     } catch (error: any) {
-        res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message });
     }
 }
 
@@ -39,13 +39,13 @@ export const loginUser = async (req: Request, res: Response) => {
             }
         });
         if (!user) {
-            res.status(404).json({ success: false, message: "User not found" });
-            return;
+            return res.status(404).json({ success: false, message: "User not found" });
+
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            res.status(401).json({ success: false, message: "Invalid password" });
-            return;
+            return res.status(401).json({ success: false, message: "Invalid password" });
+
         }
         const token = jwt.sign({
             id: user.id, email: user
@@ -53,17 +53,16 @@ export const loginUser = async (req: Request, res: Response) => {
         }, process.env.AUTH_SECRET as string, { expiresIn: "1h" });
         // set cookie
 
-        res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({ success: true, message: "Login successful", user, token });
-        return;
+        return res.cookie("token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({ success: true, message: "Login successful", user, token });
     } catch (error: any) {
-        res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message });
     }
 }
 
 export const logoutUser = async (req: Request, res: Response) => {
     try {
-        res.clearCookie("qp_token").status(200).json({ message: "Logout successful" });
+        return res.clearCookie("qp_token").status(200).json({ message: "Logout successful" });
     } catch (error: any) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
     }
 }
